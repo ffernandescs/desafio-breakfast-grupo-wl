@@ -1,0 +1,16 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+:root {
+  --primary-color: #90B5FB;
+}
+
+.tab-content {
+  position: relative;
+}
+
+.spinner-border {
+  position: absolute;
+  top: 49%;
+  right: 49%;
+  z-index: 5;
+}
