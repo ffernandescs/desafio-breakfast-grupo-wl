@@ -30,7 +30,6 @@
               </div>
               <div class="btns">
                 <button type="button" class="btn btn-primary m-2 p-2" (click)="openModal()" >Adicionar Café</button>
-                <a href="#minhasPostagens" type="button" class="btn btn-primary m-2 p-2">Lista do dia</a>
               </div>
             </div>
           </div>
@@ -40,7 +39,7 @@
         </div>
       </div>
       <div class="col text-center">
-        <div class="container mb-5 mt-5" id="postagens">
+        <div class="container mt-5" id="postagens">
           <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="todasPostagens-tab" data-bs-toggle="tab" data-bs-target="#todasPostagens"
@@ -57,7 +56,7 @@
               <span class="visually-hidden"></span>
             </div>
             <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel" aria-labelledby="todasPostagens-tab">
-              <div class="container m-4">
+              <div class="container mt-4">
                 <div class="row">
                   <div class="col-6 col-md-3" *ngFor="let coffe of listCoffes">
                     <div class="card mb-4">
@@ -89,6 +88,9 @@
                         <div class="card-body bg-secondary">
                           <h4 class="card-title text-warning">{{coffe.item}}</h4>
                           <h6 class="card-text">{{coffe.data}}</h6>
+                        </div>
+                        <div >
+                          <button class="btn btn-primary" (click)="deleteCoffe(coffe.id, coffe.usuario.id)">Apagar</button>
                         </div>
                       </div>
                     </div>

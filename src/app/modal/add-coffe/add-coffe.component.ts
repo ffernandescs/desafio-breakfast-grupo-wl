@@ -21,8 +21,7 @@ export class AddCoffeComponent {
 
 
   constructor(private formBuilder: FormBuilder,
-    private service: ApiService,
-    private location: Location) {
+    private service: ApiService) {
       const storedName = localStorage.getItem('user');
       const parsedName = storedName ? JSON.parse(storedName) : '';
       this.formAddCoffe = this.formBuilder.group({

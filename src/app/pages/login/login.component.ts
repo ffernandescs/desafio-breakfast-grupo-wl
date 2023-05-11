@@ -72,11 +72,11 @@ export class LoginComponent implements OnInit{
           this.messageType = 'success';
           this.messageLogin = 'Usuario Conectado com sucesso';
 
+          const idUsuario = response.id;
+          this.service.setUserId(idUsuario);
+
           const token = response.token
           localStorage.setItem('token', token);
-
-          const id_user = response.id.toString()
-          localStorage.setItem('id_user', id_user);
 
           const user = response.nome
           localStorage.setItem('user', JSON.stringify(user));

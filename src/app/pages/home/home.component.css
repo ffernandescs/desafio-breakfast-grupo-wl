@@ -15,6 +15,7 @@
   width: auto !important;
 }
 
+
 .dropdown-menu-left {
   left: inherit !important;
   right: 0;
@@ -27,6 +28,7 @@
 .dropdown {
   cursor: pointer;
 }
+
 
 
 

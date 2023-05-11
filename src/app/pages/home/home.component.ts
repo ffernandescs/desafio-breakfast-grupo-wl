@@ -39,6 +39,7 @@ export class HomeComponent {
 
 
   ngOnInit(): void {
+    console.log(this.listCoffesUser)
 
     const user = localStorage.getItem('user')
     if(user) {
@@ -62,26 +63,31 @@ export class HomeComponent {
       (coffes: Coffe[]) => {
         this.listCoffes = coffes;
         this.loading = false;
-      },
-      (error) => {
-        console.log('Erro ao carregar os cafés', error);
       }
     );
+  }
+
+  deleteCoffe(idCoffe: number, odUser: number) {
+    this.service.deleteCoffee(idCoffe, odUser).subscribe(() => {
+      setTimeout(() => {
+        this.loading = false;
+        window.location.reload();
+      }, 2000);    },
+      (error) => {
+        console.log('Failed to delete coffee:', error);
+      }
+    )
   }
 
   loadCoffesUser(): void {
-
     this.service.listCoffesUser().subscribe(
       (coffes: Coffe[]) => {
-        console.log(coffes)
         this.listCoffesUser = coffes;
         this.loading = false;
-      },
-      (error) => {
-        console.log('Erro ao carregar os cafés', error);
       }
     );
   }
+
 
   logout() {
     localStorage.clear();
