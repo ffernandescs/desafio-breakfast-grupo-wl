@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { catchError, of } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Coffe } from 'src/app/model/coffe';
 import { ApiService } from 'src/app/services/api.service';
-import * as jQuery from 'jquery';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'jquery/dist/jquery.min.js';
 import { Modal } from 'bootstrap';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-home',
@@ -36,11 +32,7 @@ export class HomeComponent {
       })
     }
 
-
-
   ngOnInit(): void {
-    console.log(this.listCoffesUser)
-
     const user = localStorage.getItem('user')
     if(user) {
       const parseUser = JSON.parse(user)
@@ -52,16 +44,23 @@ export class HomeComponent {
       this.loadCoffes();
       this.loadCoffesUser();
     } else {
-      // Lógica para lidar com o token ausente, por exemplo, redirecionar para a página de login.
-    }
 
+    }
   }
 
   loadCoffes(): void {
-
     this.service.listCoffes().subscribe(
       (coffes: Coffe[]) => {
         this.listCoffes = coffes;
+        this.loading = false;
+      }
+    );
+  }
+
+  loadCoffesUser(): void {
+    this.service.listCoffesUser().subscribe(
+      (coffes: Coffe[]) => {
+        this.listCoffesUser = coffes;
         this.loading = false;
       }
     );
@@ -79,31 +78,14 @@ export class HomeComponent {
     )
   }
 
-  loadCoffesUser(): void {
-    this.service.listCoffesUser().subscribe(
-      (coffes: Coffe[]) => {
-        this.listCoffesUser = coffes;
-        this.loading = false;
-      }
-    );
-  }
-
-
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
   }
-
 
   openModal() {
     const myModalEl = document.getElementById('myModal');
     const modal = new Modal(myModalEl);
     modal.show();
   }
-
-  onAddCoffe() {
-
-  }
-
-
 }

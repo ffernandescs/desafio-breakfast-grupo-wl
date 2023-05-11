@@ -38,11 +38,9 @@ export class AddCoffeComponent {
       this.loading = true;
 
     if (selectedDate > currentDate) {
-      this.messageType = 'error';
-      this.messageAddCoffe = 'A data fornecida é posterior à data atual.';
-      this.loading = false;
-    } else {
-        const coffeData = this.formAddCoffe.getRawValue();
+
+
+      const coffeData = this.formAddCoffe.getRawValue();
         this.service.addCoffe(coffeData).subscribe(
           response => {
             setTimeout(() => {
@@ -58,6 +56,10 @@ export class AddCoffeComponent {
             this.loading = false;
           }
         );
+    } else {
+      this.messageType = 'error';
+      this.messageAddCoffe = 'A data fornecida deve ser maior que a data atual.';
+      this.loading = false;
       }
     } else {
       this.messageType = 'error';
