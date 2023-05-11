@@ -19,10 +19,11 @@ import { Router } from '@angular/router';
 export class HomeComponent {
 
   form: FormGroup;
-
   loading: boolean = true;
-
   listCoffes: Coffe[] = []
+
+
+  valueUser: [] = []
 
   constructor(private service: ApiService,
               private formBuilder: FormBuilder,
@@ -42,6 +43,12 @@ export class HomeComponent {
    // const myModalEl = document.getElementById('myModal');
     //const modal = new Modal(myModalEl);
     //modal.show();
+
+    const user = localStorage.getItem('user')
+    if(user) {
+      const parseUser = JSON.parse(user)
+      this.valueUser = parseUser
+    }
 
     const token = localStorage.getItem('token');
     if (token) {

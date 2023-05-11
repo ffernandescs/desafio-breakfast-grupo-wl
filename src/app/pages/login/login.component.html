@@ -15,7 +15,7 @@
             <h2 class="title">Bem vindo!</h2>
             <p>Use seu CPF para Registrar</p>
           </div>
-          <form [formGroup]="formRegister">
+          <form [formGroup]="formRegister" class="p-5 m-2">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nome:</label>
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="nome"
@@ -40,17 +40,17 @@
                 *Campo obrigatório!
               </div>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Confirmar Senha:</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" formControlName="passwordConfirm"
-              [ngClass]="{ 'is-invalid': isPassConfReInval() }">
-               <div class="invalid-feedback" *ngIf="isPassConfReInval()">
-                *Campo obrigatório!
-              </div>
-            </div>
+            
             <div class="text-center">
-              <button type="submit" class="btn btn-danger m-4" (click)="onCancel()">Cancelar</button>
-              <button type="submit" class="btn btn-primary m-4" (click)="onSubmit()">Cadastrar</button>
+              <button type="submit" class="btn btn-primary m-4" (click)="onRegister()">Cadastrar</button>
+              <div class="text-center" *ngIf="messageRegister" [ngClass]="{'messageRegister': true, 'success': messageType === 'success', 'error': messageType === 'error'}">
+              {{messageRegister}}
+              </div>
+              <div class="text-success text-center d-flex flex-column justify-content-center align-items-center m-2" *ngIf="loading">
+                <div class="spinner-border text-primary" role="status" >
+                  <span class="visually-hidden"></span>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -61,10 +61,10 @@
         <div class="text p-4">
           <div class="text-center">
             <h2 class="title">Fazer Login!</h2>
-            <p>Use sua Conta</p>
+            <p>Use sua conta</p>
           </div>
-          <form [formGroup]="formLogin">
-            <div class="mb-3">
+          <form [formGroup]="formLogin" class="p-5">
+            <div class="mb-3 ">
               <label for="exampleInputLogin" class="form-label">CPF:</label>
               <input type="text" class="form-control" name="login" formControlName="login"
               [ngClass]="{ 'is-invalid': isloginInvalid() }">
@@ -84,18 +84,15 @@
             <div class="text-center">
               <button type="submit" class="btn btn-primary m-4" [disabled]="formLogin.invalid" (click)="onLogin()">Fazer Login</button>
             </div>
-            <div class="text-danger text-center" *ngIf="showIncorrectPasswordMessage">
-              Senha incorreta
+          
+            <div class="text-center" *ngIf="messageLogin" [ngClass]="{'messageLogin': true, 'success': messageType === 'success', 'error': messageType === 'error'}">
+              {{messageLogin}}
             </div>
             <div class="text-success text-center d-flex flex-column justify-content-center align-items-center" *ngIf="loading">
-              
               <div class="spinner-border text-primary" role="status" >
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden"></span>
               </div>
-              Enviando
             </div>
-           
-            
           </form>
    
         </div>
@@ -103,7 +100,7 @@
       <div class="col-md-6 p-5 bg-dark text-center">
         <div class="d-flex justify-content-center flex-column align-items-center h-75 p-5 text-center text-white">
           <img src="../../../assets/img/breakfast-login.jpg" alt="" >
-          <h2 class="title">Olá Crie uma Conta!</h2>
+          <h2 class="title">Olá, Crie uma Conta!</h2>
           <p>Entre com os seus dados e crie sua conta.</p>
           <button type="button" class="btn btn-light" (click)="adicionouClasse()">Cadastrar</button>
         </div>
@@ -120,7 +117,7 @@
         <p>Para fazer Login, por favor entre com os seus Dados Cadastrais</p>
       </div>
       <div class="text p-4">
-        <form [formGroup]="formLogin">
+        <form [formGroup]="formLogin" class="">
           <div class="mb-3">
             <label for="exampleInputLogin" class="form-label">CPF:</label>
             <input type="text" class="form-control" name="login" formControlName="login"
@@ -150,8 +147,8 @@
             </div>
             Logado com sucesso!
           </div>
-          <div class="text-danger text-center m-2" *ngIf="showIncorrectPasswordMessage">
-            Usuario ou senha incorreta.
+          <div class="text-center" *ngIf="messageLogin" [ngClass]="{'messageLogin': true, 'success': messageType === 'success', 'error': messageType === 'error'}">
+            {{messageLogin}}
           </div>
           
         </form>
@@ -188,16 +185,9 @@
               *Campo obrigatório!
             </div>
           </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Confirmar Senha:</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="passwordConfirm"
-            [ngClass]="{ 'is-invalid': isPassConfReInval() }">
-             <div class="invalid-feedback" *ngIf="isPassConfReInval()">
-              *Campo obrigatório!
-            </div>
-          </div>
+         
           <div class="text-center">
-            <button type="submit" class="btn btn-primary m-4" (click)="onSubmit()">Cadastrar</button>
+            <button type="submit" class="btn btn-primary m-4" (click)="onRegister()">Cadastrar</button>
           </div>
           <div class="text-center">
             <span class="hand-cursor" (click)="removerClasse()">Fazer login</span>

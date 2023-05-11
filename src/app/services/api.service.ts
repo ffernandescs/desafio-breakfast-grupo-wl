@@ -13,28 +13,35 @@ export class ApiService {
 
   private readonly API = '/api'
 
-  constructor(private httpClient: HttpClient) { }
+  private getAuthorizationHeader(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  constructor(private httpClient: HttpClient) {}
 
   listCoffes() {
-
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.httpClient.get<Coffe[]>(this.API + '/coffes/listarTodos', { headers })
+    return this.httpClient.get<Coffe[]>(this.API + '/coffes/listarTodos', { headers: this.getAuthorizationHeader() })
       .pipe(
         delay(2000))
   }
 
   login(record: User) {
-    return this.httpClient.post(this.API + '/login', record).pipe(
+    return this.httpClient.post<User>(this.API + '/login', record).pipe(
       delay(2000));
   }
 
-  vaslidLogin() {
-    return this.httpClient.get(`${this.API}/user/login?login=06402326470&password=123 `)
+  register(record: User) {
+    return this.httpClient.post<User>(this.API + '/register', record)
   }
 
-  saveCoffe(record: Coffe) {
-    return this.httpClient.post<Coffe>(this.API + "/coffes/listarTodos", record).pipe()
+
+  addCoffe(record: Coffe) {
+    const headers = this.getAuthorizationHeader();
+    return this.httpClient.post<Coffe>(`${this.API}/coffes/criar`, record, { headers })
+      .pipe(
+        delay(2000)
+      );
   }
 
 

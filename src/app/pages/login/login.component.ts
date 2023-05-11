@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'; 
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit{
   classeLogin = false;
 
   showIncorrectPasswordMessage: boolean = false;
+  messageRegister: string = '';
+  messageLogin: string = '';
   correctPassword: boolean = false;
+  messageType: string = '';
   loading: boolean = false;
 
   formLogin: FormGroup;
@@ -21,12 +25,12 @@ export class LoginComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder,
     private service: ApiService,
-    private router: Router) {  
+    private router: Router) {
 
       this.formLogin = this.formBuilder.group({
         login: ['', Validators.required],
         password: ['', Validators.required]
-      }); 
+      });
 
      this.formLogin.get('login')?.valueChanges.subscribe(value => {
       const formattedValue = this.formatCpf(value)
@@ -37,14 +41,13 @@ export class LoginComponent implements OnInit{
         nome: ['', Validators.required],
         login: ['', Validators.required],
         password: ['', Validators.required],
-        passwordConfirm: ['', Validators.required]
-      }); 
+      });
 
       this.formRegister.get('login')?.valueChanges.subscribe(value => {
         const formattedValue = this.formatCpf(value)
         this.formRegister.get('login')?.setValue(formattedValue, { emitEvent: false })
        })
-      
+
   }
   formatCpf(cpf: string): string {
     cpf = cpf.replace(/\D/g, ''); // Remove tudo que não for dígito
@@ -52,40 +55,63 @@ export class LoginComponent implements OnInit{
     cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4'); // Adiciona pontos e traço
     return cpf;
   }
- 
+
   ngOnInit(): void {
-    
+
   }
 
   onCancel() {
   }
 
   onLogin() {
-    this.showIncorrectPasswordMessage = false;
+    this.messageLogin = ''
     if (this.formLogin.valid) {
       this.loading = true;
       this.service.login(this.formLogin.value).subscribe(
-        (response: any) => {
-         
-          const token = response.token 
-          localStorage.setItem('token', token); 
-          this.router.navigate(['/home']);
-          this.formLogin.controls['password'].setErrors(null);
-          this.showIncorrectPasswordMessage = false;
-          this.correctPassword = true; 
+        response => {
+          this.messageType = 'success';
+          this.messageLogin = 'Usuario Conectado com sucesso';
           this.loading = false;
-          const user = {
-            username: this.formLogin.controls['login'].value,
-          };
-          localStorage.setItem('user', JSON.stringify(user));
+          const token = response.token
+          localStorage.setItem('token', token);
+          this.formLogin.controls['password'].setErrors(null);
 
+          const user = response.nome
+          localStorage.setItem('user', JSON.stringify(user));
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 2000);
         },
         (error) => {
-          this.showIncorrectPasswordMessage = true;
-          this.correctPassword = true; 
+          this.messageLogin = 'Usuario e senha incorreto';
+          this.messageType = 'error';
           this.loading = false;
         }
-      );
+      )
+    }
+  }
+
+
+
+  onRegister() {
+    if(this.formRegister.valid) {
+      this.loading = true;
+      this.service.register(this.formRegister.value).subscribe(
+        response => {
+          this.loading = false;
+          this.messageRegister = 'Usuario Cadastrado com sucesso';
+          this.messageType = 'success';
+          this.formRegister.reset();
+        },
+        error => {
+          this.messageRegister = 'Usuário ja existe';
+          this.messageType = 'error';
+          this.loading = false;
+        }
+      )
+    } else {
+      this.messageType = 'error';
+      this.messageRegister = 'Preencha todos os campos';
     }
   }
 
@@ -99,7 +125,7 @@ export class LoginComponent implements OnInit{
     const control = this.formLogin.controls['login'];
     return control.invalid && (control.dirty || control.touched);
   }
- 
+
   isNomeInvalid(): boolean {
     const control = this.formRegister.controls['nome'];
     return control.invalid && (control.dirty || control.touched);
@@ -123,9 +149,9 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit() {
-    
+
   }
-  
+
   adicionouClasse() {
     this.classeLogin = true
   }
