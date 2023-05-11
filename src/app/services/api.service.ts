@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 
 import { Coffe } from 'src/app/model/coffe';
 import { tap, delay } from 'rxjs';
+import { User } from '../model/user';
 
 
 @Injectable({
@@ -10,16 +11,30 @@ import { tap, delay } from 'rxjs';
 })
 export class ApiService {
 
-  private readonly API = 'api/coffes'
+  private readonly API = '/api'
 
   constructor(private httpClient: HttpClient) { }
 
   listCoffes() {
-    return this.httpClient.get<Coffe[]>(this.API)
+
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<Coffe[]>(this.API + '/coffes/listarTodos', { headers })
       .pipe(
-        delay(1000),
-        tap(coffes => console.log(coffes))
-      )
+        delay(2000))
+  }
+
+  login(record: User) {
+    return this.httpClient.post(this.API + '/login', record).pipe(
+      delay(2000));
+  }
+
+  vaslidLogin() {
+    return this.httpClient.get(`${this.API}/user/login?login=06402326470&password=123 `)
+  }
+
+  saveCoffe(record: Coffe) {
+    return this.httpClient.post<Coffe>(this.API + "/coffes/listarTodos", record).pipe()
   }
 
 

@@ -1,11 +1,19 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
 :root {
   --primary-color: #90B5FB;
 }
 
 .tab-content {
   position: relative;
+  
 }
 
 .spinner-border {
@@ -14,3 +22,20 @@
   right: 49%;
   z-index: 5;
 }
+
+.fa-user {
+  font-size: 30px;
+  color: #FFF;
+  width: auto;
+}
+
+.navbar {
+  width: auto !important;
+}
+
+.dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+

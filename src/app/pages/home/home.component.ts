@@ -1,7 +1,15 @@
 import { Component } from '@angular/core';
-import { Observable, catchError, of } from 'rxjs';
+import { catchError, of } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms'; 
 import { Coffe } from 'src/app/model/coffe';
 import { ApiService } from 'src/app/services/api.service';
+import * as jQuery from 'jquery';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'jquery/dist/jquery.min.js';
+import { Modal } from 'bootstrap';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-home',
@@ -10,29 +18,68 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class HomeComponent {
 
-  loading: boolean = false;
+  form: FormGroup;
+
+  loading: boolean = true;
 
   listCoffes: Coffe[] = []
 
-  //coffesService: ApiService;
-
-  constructor(private coffesService: ApiService) {
-      this.loading = true;
-      this.coffesService.listCoffes()
-      .pipe(
-        catchError(error => {
-          return of([])
-        })
-      ) 
-      .subscribe(coffes => {
-        this.listCoffes = coffes;
-        this.loading = false;
-      });
+  constructor(private service: ApiService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
+      
+      this.form = this.formBuilder.group({
+        nome: [null],
+        cpf: [null],
+        password: [null],
+      })
     }
 
-  ngOnInit(): void {
-    this.loading = true;
+    
 
+  ngOnInit(): void {
+    
+   // const myModalEl = document.getElementById('myModal');
+    //const modal = new Modal(myModalEl);
+    //modal.show();
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.loadCoffes();
+    } else {
+      // Lógica para lidar com o token ausente, por exemplo, redirecionar para a página de login.
+    }
+    
   }
+
+  loadCoffes(): void {
+    
+    this.service.listCoffes().subscribe(
+      (coffes: Coffe[]) => {
+        this.listCoffes = coffes;
+        this.loading = false;
+      },
+      (error) => {
+        console.log('Erro ao carregar os cafés', error);
+      }
+    );
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+  
+
+  openModal() {
+    const myModalEl = document.getElementById('myModal');
+    const modal = new Modal(myModalEl);
+    modal.show();
+  }
+
+  onAddCoffe() {
+    
+  }
+  
 
 }
