@@ -89,6 +89,10 @@ img {
   border-radius: 10px;
 }
 
+.success2 {
+  color: #FFF;
+}
+
 .success {
   color: green;
 }
@@ -116,13 +120,13 @@ img {
     position: absolute !important;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: -5;
   }
 
   .primary-mobile.sign-up {
     z-index: -5;
   }
-  
+
   .secondy-mobile.sign-in {
     z-index: 2;
   }
@@ -131,13 +135,13 @@ img {
     cursor: pointer;
   }
 
-  
+
   .hand-cursor:hover {
     color: #CCC;
   }
 
 
 
-  
+
 }
 

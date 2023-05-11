@@ -40,7 +40,7 @@
                 *Campo obrigatório!
               </div>
             </div>
-            
+
             <div class="text-center">
               <button type="submit" class="btn btn-primary m-4" (click)="onRegister()">Cadastrar</button>
               <div class="text-center" *ngIf="messageRegister" [ngClass]="{'messageRegister': true, 'success': messageType === 'success', 'error': messageType === 'error'}">
@@ -80,11 +80,11 @@
                 *Campo obrigatório!
               </div>
             </div>
-            
+
             <div class="text-center">
               <button type="submit" class="btn btn-primary m-4" [disabled]="formLogin.invalid" (click)="onLogin()">Fazer Login</button>
             </div>
-          
+
             <div class="text-center" *ngIf="messageLogin" [ngClass]="{'messageLogin': true, 'success': messageType === 'success', 'error': messageType === 'error'}">
               {{messageLogin}}
             </div>
@@ -94,7 +94,7 @@
               </div>
             </div>
           </form>
-   
+
         </div>
       </div>
       <div class="col-md-6 p-5 bg-dark text-center">
@@ -137,20 +137,19 @@
           <div class="text-center">
             <button type="submit" class="btn btn-primary m-4" [disabled]="formLogin.invalid" (click)="onLogin()">Fazer Login</button>
           </div>
-          
+
           <div class="text-center">
             <span class="hand-cursor" (click)="adicionouClasse()">Cadastre-se</span>
           </div>
           <div class="text-success text-center d-flex flex-column justify-content-center align-items-center" *ngIf="loading">
-            <div class="spinner-border text-primary" role="status" >
+            <div class="spinner-border text-primary m-3" role="status" >
               <span class="visually-hidden"></span>
             </div>
-            Logado com sucesso!
           </div>
-          <div class="text-center" *ngIf="messageLogin" [ngClass]="{'messageLogin': true, 'success': messageType === 'success', 'error': messageType === 'error'}">
+          <div class="text-center m-3" *ngIf="messageLogin" [ngClass]="{'messageLogin': true, 'success2': messageType === 'success', 'error': messageType === 'error'}">
             {{messageLogin}}
           </div>
-          
+
         </form>
       </div>
     </div>
@@ -185,7 +184,7 @@
               *Campo obrigatório!
             </div>
           </div>
-         
+
           <div class="text-center">
             <button type="submit" class="btn btn-primary m-4" (click)="onRegister()">Cadastrar</button>
           </div>

@@ -12,6 +12,7 @@ import { User } from '../model/user';
 export class ApiService {
 
   private readonly API = '/api'
+  private readonly id_user = localStorage.getItem('id_user')
 
   private getAuthorizationHeader(): HttpHeaders {
     const token = localStorage.getItem('token');
@@ -21,9 +22,15 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
   listCoffes() {
-    return this.httpClient.get<Coffe[]>(this.API + '/coffes/listarTodos', { headers: this.getAuthorizationHeader() })
+    return this.httpClient.get<Coffe[]>(this.API + '/coffes/listCoffes', { headers: this.getAuthorizationHeader() })
       .pipe(
-        delay(2000))
+        delay(300))
+  }
+
+  listCoffesUser() {
+    return this.httpClient.get<Coffe[]>(this.API + '/coffes/listCoffesUser?idUsuario=' + this.id_user, { headers: this.getAuthorizationHeader() })
+      .pipe(
+        delay(300))
   }
 
   login(record: User) {
@@ -38,11 +45,9 @@ export class ApiService {
 
   addCoffe(record: Coffe) {
     const headers = this.getAuthorizationHeader();
-    return this.httpClient.post<Coffe>(`${this.API}/coffes/criar`, record, { headers })
+    return this.httpClient.post<Coffe>(`${this.API}/coffes/register`, record, { headers })
       .pipe(
-        delay(2000)
+        delay(50)
       );
   }
-
-
 }

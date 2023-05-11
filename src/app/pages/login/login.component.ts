@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
-import { error } from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -50,9 +49,10 @@ export class LoginComponent implements OnInit{
 
   }
   formatCpf(cpf: string): string {
-    cpf = cpf.replace(/\D/g, ''); // Remove tudo que não for dígito
-    cpf = cpf.slice(0, 11); // Limita o campo a 11 dígitos
-    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4'); // Adiciona pontos e traço
+    cpf = cpf.replace(/^\d{11}$/, '')
+    cpf = cpf.replace(/\D/g, '');
+    cpf = cpf.slice(0, 11);
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4');
     return cpf;
   }
 
@@ -71,14 +71,20 @@ export class LoginComponent implements OnInit{
         response => {
           this.messageType = 'success';
           this.messageLogin = 'Usuario Conectado com sucesso';
-          this.loading = false;
+
           const token = response.token
           localStorage.setItem('token', token);
-          this.formLogin.controls['password'].setErrors(null);
+
+          const id_user = response.id.toString()
+          localStorage.setItem('id_user', id_user);
 
           const user = response.nome
           localStorage.setItem('user', JSON.stringify(user));
+
+          this.formLogin.controls['password'].setErrors(null);
+
           setTimeout(() => {
+            this.loading = false;
             this.router.navigate(['/home']);
           }, 2000);
         },

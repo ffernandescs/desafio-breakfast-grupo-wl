@@ -1,6 +1,9 @@
 <div class="modal" id="myModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content position-relative">
+      <div class="spinner-border position-absolute top-50 start-50 translate-middl z-index-10 text-center text-primary" role="status" *ngIf="loading">
+        <span class="visually-hidden"></span>
+      </div>
       <div class="modal-header">
         <h5 class="modal-title">Adicionar Café da manha</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -23,8 +26,12 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-primary" (click)="addCoffe()">Salvar</button>
           </div>
+          <div class="text-center" *ngIf="messageAddCoffe" [ngClass]="{'messageAddCoffe': true, 'success': messageType === 'success', 'error': messageType === 'error'}">
+            {{messageAddCoffe}}
+          </div>
         </form>
       </div>
     </div>
   </div>
+
 </div>
