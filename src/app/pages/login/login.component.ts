@@ -108,6 +108,7 @@ export class LoginComponent implements OnInit{
           this.messageRegister = 'Usuario Cadastrado com sucesso';
           this.messageType = 'success';
           this.formRegister.reset();
+          this.removerClasse()
         },
         error => {
           this.messageRegister = 'Usuário ja existe';

@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AddCoffeComponent } from './modal/add-coffe/add-coffe.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './auth.guard';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -19,6 +20,7 @@ import { AuthGuard } from './auth.guard';
     LoginComponent,
     HomeComponent,
     AddCoffeComponent,
+    FooterComponent,
     
   ],
   imports: [

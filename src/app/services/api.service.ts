@@ -34,14 +34,14 @@ export class ApiService {
   listCoffes() {
     return this.httpClient.get<Coffe[]>(this.API + '/coffes/listCoffes', { headers: this.getAuthorizationHeader() })
       .pipe(
-        delay(300))
+        delay(500))
   }
 
   listCoffesUser() {
     const idUsuario = this.getUserId();
     return this.httpClient.get<Coffe[]>(`${this.API}/coffes/listCoffesUser?idUsuario=${idUsuario}`, { headers: this.getAuthorizationHeader() })
       .pipe(
-        delay(1000))
+        delay(500))
   }
 
   deleteCoffee(idCoffe: number, idUsuario: number) {
@@ -50,11 +50,12 @@ export class ApiService {
 
   login(record: User) {
     return this.httpClient.post<User>(this.API + '/login', record).pipe(
-      delay(2000));
+      delay(500));
   }
 
   register(record: User) {
-    return this.httpClient.post<User>(this.API + '/register', record)
+    return this.httpClient.post<User>(this.API + '/register', record).pipe(
+      delay(500));
   }
 
 
@@ -62,7 +63,7 @@ export class ApiService {
     const headers = this.getAuthorizationHeader();
     return this.httpClient.post<Coffe>(`${this.API}/coffes/register`, record, { headers })
       .pipe(
-        delay(50)
+        delay(300)
       );
   }
 }

@@ -115,6 +115,9 @@ img {
     position: relative;
   }
 
+  .primary-mobile {
+    padding: 1rem !important;
+  }
 
   .secondy-mobile {
     position: absolute !important;
@@ -131,17 +134,23 @@ img {
     z-index: 2;
   }
 
+  img {
+    width: 130px;
+    height: 130px;
+    margin: 1rem;
+  }
+
+
+  input {
+    padding: .6rem 1rem !important;
+  }
+
   .hand-cursor {
     cursor: pointer;
   }
 
-
   .hand-cursor:hover {
     color: #CCC;
   }
-
-
-
-
 }
 

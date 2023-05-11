@@ -76,7 +76,7 @@
               </div>
             </div>
             <div class="tab-pane fade " id="minhasPostagens" role="tabpanel" aria-labelledby="minhasPostagens-tab">
-              <div class="container m-4">
+              <div class="container  mt-4">
                 <div class="row">
                   <div class="col-6 col-md-3" *ngFor="let coffe of listCoffesUser">
                     <div class="card mb-4">
@@ -89,7 +89,7 @@
                           <h4 class="card-title text-warning">{{coffe.item}}</h4>
                           <h6 class="card-text">{{coffe.data}}</h6>
                         </div>
-                        <div >
+                        <div class="mt-3 mb-3" >
                           <button class="btn btn-primary" (click)="deleteCoffe(coffe.id, coffe.usuario.id)">Apagar</button>
                         </div>
                       </div>
@@ -104,4 +104,5 @@
     </div>
   </div>
   <app-add-coffe></app-add-coffe>
+  <app-footer></app-footer>
 </header>

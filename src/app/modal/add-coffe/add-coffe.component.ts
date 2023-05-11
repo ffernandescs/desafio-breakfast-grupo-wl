@@ -19,7 +19,6 @@ export class AddCoffeComponent {
 
   loading: boolean = false;
 
-
   constructor(private formBuilder: FormBuilder,
     private service: ApiService) {
       const storedName = localStorage.getItem('user');

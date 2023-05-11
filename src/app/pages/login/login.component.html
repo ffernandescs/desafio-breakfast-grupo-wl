@@ -109,7 +109,7 @@
   </div>
 
  <div class="mobile w-100 vh-100 overflow-hidden">
-  <div class="row h-100 m-0 p-0">
+  <div class="row h-100 m-0 p-0 position-relative">
     <div class="primary-mobile col bg-dark p-5 text-white" [ngClass]="{ 'sign-up': classeLogin }">
       <div class="d-flex  flex-column align-items-center text-center ">
         <img src="../../../assets/img/breakfast-login.jpg" alt="" >
@@ -117,7 +117,12 @@
         <p>Para fazer Login, por favor entre com os seus Dados Cadastrais</p>
       </div>
       <div class="text p-4">
-        <form [formGroup]="formLogin" class="">
+        <form [formGroup]="formLogin">
+          <div class="position-absolute text-success text-center d-flex flex-column justify-content-center align-items-center" style="top:49%; left:42%" *ngIf="loading">
+            <div class="spinner-border text-primary m-3" role="status" >
+              <span class="visually-hidden"></span>
+            </div>
+          </div>
           <div class="mb-3">
             <label for="exampleInputLogin" class="form-label">CPF:</label>
             <input type="text" class="form-control" name="login" formControlName="login"
@@ -141,11 +146,7 @@
           <div class="text-center">
             <span class="hand-cursor" (click)="adicionouClasse()">Cadastre-se</span>
           </div>
-          <div class="text-success text-center d-flex flex-column justify-content-center align-items-center" *ngIf="loading">
-            <div class="spinner-border text-primary m-3" role="status" >
-              <span class="visually-hidden"></span>
-            </div>
-          </div>
+
           <div class="text-center m-3" *ngIf="messageLogin" [ngClass]="{'messageLogin': true, 'success2': messageType === 'success', 'error': messageType === 'error'}">
             {{messageLogin}}
           </div>
