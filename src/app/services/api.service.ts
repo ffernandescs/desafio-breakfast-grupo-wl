@@ -46,7 +46,8 @@ export class ApiService {
   }
 
   deleteCoffee(idCoffe: number, idUsuario: number) {
-    return this.httpClient.delete(`/api/coffes/deleteCoffe?idCoffe=${idCoffe}&idUsuario=${idUsuario}`, { headers: this.getAuthorizationHeader(), responseType: 'text' });
+    console.log(idCoffe, idUsuario)
+    return this.httpClient.delete(`${this.API}/coffes/deleteCoffe?idCoffe=${idCoffe}&idUsuario=${idUsuario}`, { headers: this.getAuthorizationHeader(), responseType: 'text' });
   }
 
   login(record: User) {

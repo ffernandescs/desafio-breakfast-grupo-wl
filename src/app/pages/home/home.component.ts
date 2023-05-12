@@ -66,16 +66,15 @@ export class HomeComponent {
     );
   }
 
-  deleteCoffe(idCoffe: number, odUser: number) {
-    this.service.deleteCoffee(idCoffe, odUser).subscribe(() => {
+  deleteCoffe(idCoffe: number, idUsuario: number) {
+    this.service.deleteCoffee(idCoffe, idUsuario).subscribe(() => {
       setTimeout(() => {
         this.loading = false;
         window.location.reload();
-      }, 1000);    },
-      (error) => {
-        console.log('Failed to delete coffee:', error);
-      }
-    )
+      }, 1000);
+    }, (error) => {
+      console.log('Failed to delete coffee:', error);
+    });
   }
 
   logout() {
