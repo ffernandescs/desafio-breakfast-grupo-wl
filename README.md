@@ -130,7 +130,7 @@ A base do projeto sera disponibilizada para uso publico, criei algumas funcional
   - Foi implementado uma validação de textos que quando não preenchidos informa uma menssagem (*Campo obrigatorio) e muda a cor.
 
   - Foi implementado uma tela de cadastro de novos café da manha.
-  - 
+
   - Foi implementado o loading, para carregamento dos resultados.
 
 
@@ -160,6 +160,27 @@ Procure o arquivo GrupowlApplication e execulte pela IDE
 \src\main\java\com\brackfast\grupowl\GrupowlApplication
 ```
 
+Instale o Banco de dados PostgreSQL
+
+```
+https://www.postgresql.org/
+```
+
+Crie um database com o nome
+
+```
+CoffeGPWL
+```
+
+Mude as configurações do Application.properties no backend
+
+```
+spring.datasource.url= jdbc:postgresql://localhost:5432/CoffeGPWL
+spring.datasource.username=postgres
+spring.datasource.password=admin
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
 
 ## Linguagens e dependencias
 
