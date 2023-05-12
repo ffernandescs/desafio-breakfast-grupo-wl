@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import * as moment from 'moment';
 import { ApiService } from 'src/app/services/api.service';
 
 
@@ -33,11 +33,12 @@ export class AddCoffeComponent {
   addCoffe() {
     this.messageAddCoffe = '';
     if (this.formAddCoffe.valid) {
-      const selectedDate = new Date(this.formAddCoffe.value.data);
-      const currentDate = new Date();
+      const selectedDate = moment(this.formAddCoffe.value.data).utc();
+      const currentDate = moment().utc();
+
       this.loading = true;
 
-    if (selectedDate > currentDate) {
+    if (selectedDate.isAfter(currentDate)) {
 
 
       const coffeData = this.formAddCoffe.getRawValue();

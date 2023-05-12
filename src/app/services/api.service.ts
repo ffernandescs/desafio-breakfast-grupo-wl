@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Coffe } from 'src/app/model/coffe';
 import { tap, delay, Observable } from 'rxjs';
 import { User } from '../model/user';
+import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { User } from '../model/user';
 })
 export class ApiService {
 
-  private readonly API = '/api'
+  private readonly API = environment.apiUrl
   private idUsuario = '0';
 
   private getAuthorizationHeader(): HttpHeaders {
