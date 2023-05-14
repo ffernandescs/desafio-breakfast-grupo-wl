@@ -84,7 +84,7 @@ O projeto proposto pela empresa Grupo WL, é uma lista de café da manha. O proj
 
 > Link do deploy da aplicação frontend. Exemplo com netilify: [Acessar](https://cafedamanhagrupowl.netlify.app) 
 
-> Link do deploy da aplicação backend. Exemplo com netilify: [Acessar](https://cafe-da-manha-back-end.up.railway.app) 
+> Link do deploy da aplicação backend. Exemplo com railway: [Acessar](https://cafe-da-manha-back-end.up.railway.app) 
 
 ![image](https://i.postimg.cc/MHrBN7GY/Design-sem-nome.gif)
 
